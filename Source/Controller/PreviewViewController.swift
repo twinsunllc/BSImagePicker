@@ -81,12 +81,27 @@ class PreviewViewController: UIViewController {
         guard let indexPath = previewCollectionView.indexPathForItem(at: location) else { return }
         guard let cell = previewCollectionView.cellForItem(at: indexPath) as? PreviewCell else { return }
 
-        if cell.scrollView.zoomScale != 1 {
-            cell.scrollView.setZoomScale(1, animated: true)
-        } else {
+        let targetZoomScale: CGFloat
+        if cell.scrollView.zoomScale == 1 { // If we are already zoomed in, double tap will zoom out
+            targetZoomScale = 2
             fullscreen = true
-            cell.scrollView.setZoomScale(2, animated: true)
+        } else { // Otherwise zoom in
+            targetZoomScale = 1
+            fullscreen = false
         }
+
+        // Calculate a rect to zoom to
+        let targetZoomPoint = sender.location(in: cell.scrollView)
+        var destinationRect = CGRect.zero
+        destinationRect.size.width = cell.scrollView.frame.width / targetZoomScale
+        destinationRect.size.height = cell.scrollView.frame.height / targetZoomScale
+        destinationRect.origin.x = targetZoomPoint.x - (destinationRect.width * 0.5)
+        destinationRect.origin.y = targetZoomPoint.y - (destinationRect.height * 0.5)
+
+        // Zoom to rect
+        UIView.animate(withDuration: 0.55, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 0.6, options: .allowUserInteraction, animations: {
+            cell.scrollView.zoom(to: destinationRect, animated: false)
+        }, completion: nil)
     }
 
     // MARK: Helpers for toggling fullscreen
