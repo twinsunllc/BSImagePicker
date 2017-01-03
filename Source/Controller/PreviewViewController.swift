@@ -82,10 +82,10 @@ class PreviewViewController: UIViewController {
         guard let cell = previewCollectionView.cellForItem(at: indexPath) as? PreviewCell else { return }
 
         let targetZoomScale: CGFloat
-        if cell.scrollView.zoomScale == 1 { // If we are already zoomed in, double tap will zoom out
+        if cell.scrollView.zoomScale == 1 { // If we are zoomed out, zoom in
             targetZoomScale = 2
             fullscreen = true
-        } else { // Otherwise zoom in
+        } else { // Otherwise zoom out
             targetZoomScale = 1
             fullscreen = false
         }

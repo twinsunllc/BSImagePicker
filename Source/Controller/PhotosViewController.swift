@@ -58,6 +58,9 @@ extension PhotosViewController {
         longPressRecognizer.minimumPressDuration = 0.3
         longPressRecognizer.cancelsTouchesInView = true
         collectionView?.addGestureRecognizer(longPressRecognizer)
+
+        // Set as delegate so we can controll the push animation
+        navigationController?.delegate = self
     }
 }
 
@@ -77,7 +80,7 @@ extension PhotosViewController {
         // Present preview
         let vc = PreviewViewController.instantiateFromStoryboard()
         vc.album = album
-        present(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
 
         // Re-enable recognizer, after animation is done
         sender.isEnabled = true
@@ -176,6 +179,13 @@ extension PhotosViewController {
 
         // Do callback
         onDeselect?(photo)
+    }
+}
+
+// MARK: UINavigationControllerDelegate
+extension PhotosViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PreviewAnimator()
     }
 }
 
