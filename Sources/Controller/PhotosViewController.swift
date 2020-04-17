@@ -216,10 +216,10 @@ final class PhotosViewController : UICollectionViewController {
         // Set up a photo data source with album
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            NSSortDescriptor(key: "modificationDate", ascending: false)
         ]
         if (settings.enableVideos){
-            print("getting videos too")
+            print("getting videos too lalala")
             let videoPredicate = NSPredicate(format: "mediaType = %d AND duration <= %f", PHAssetMediaType.video.rawValue, settings.maxDuration)
             let imagePredicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [videoPredicate, imagePredicate])
