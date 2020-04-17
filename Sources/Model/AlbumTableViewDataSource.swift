@@ -55,12 +55,12 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
         cell.albumTitleLabel.text = album.localizedTitle
         
         let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "modificationDate", ascending: false)
-        ]
+//        fetchOptions.sortDescriptors = [
+//            NSSortDescriptor(key: "modificationDate", ascending: false)
+//        ]
         
         if(self.settings.enableVideos) {
-            print("getting videos too lalala")
+            print("getting videos too lalala2")
             let videoPredicate = NSPredicate(format: "mediaType = %d AND duration <= %f", PHAssetMediaType.video.rawValue, settings.maxDuration)
             let imagePredicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [videoPredicate, imagePredicate])
