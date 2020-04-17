@@ -59,9 +59,8 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
             NSSortDescriptor(key: "modificationDate", ascending: false)
         ]
         
-        print("LALALALALA TEST LOG")
         if(self.settings.enableVideos) {
-            print("getting videos too")
+            print("getting videos too lalala")
             let videoPredicate = NSPredicate(format: "mediaType = %d AND duration <= %f", PHAssetMediaType.video.rawValue, settings.maxDuration)
             let imagePredicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [videoPredicate, imagePredicate])
