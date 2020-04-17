@@ -56,7 +56,7 @@ final class AlbumTableViewDataSource : NSObject, UITableViewDataSource {
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "creationDate", ascending: false)
+            NSSortDescriptor(key: "modificationDate", ascending: false)
         ]
         
         print(self.settings.enableVideos)
