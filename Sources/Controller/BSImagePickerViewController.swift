@@ -62,6 +62,7 @@ open class BSImagePickerViewController : UINavigationController {
         let customFetchOptions = PHFetchOptions()
         customFetchOptions.includeHiddenAssets = false
         customFetchOptions.includeAllBurstAssets = false
+        
         let cameraAlbumsResult = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: customFetchOptions)
         
         // Albums fetch result

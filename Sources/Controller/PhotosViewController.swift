@@ -216,7 +216,7 @@ final class PhotosViewController : UICollectionViewController {
         // Set up a photo data source with album
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [
-            NSSortDescriptor(key: "modificationDate", ascending: false)
+            NSSortDescriptor(key: "creationDate", ascending: false)
         ]
         if (settings.enableVideos){
             print("getting videos too")
